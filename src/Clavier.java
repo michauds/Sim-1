@@ -20,7 +20,7 @@ import java.io.*;
  *   criteres suivants est rencontre :
  *
  *   - C'est un caractere Unicode espace (SPACE_SEPARATOR, LINE_SEPARATOR,
- *      ou PARAGRAPH_SEPARATOR) mais n'est pas aussi un caractère espace
+ *      ou PARAGRAPH_SEPARATOR) mais n'est pas aussi un caractere espace
  *      non-sécable ('\u00A0', '\u2007', '\u202F'). 
  *   - C'est '\u0009', HORIZONTAL TABULATION.
  *   - C'est '\u000A', LINE FEED.                 LF

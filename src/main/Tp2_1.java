@@ -1,3 +1,4 @@
+package main;
 
 /**
  * La classe Tp2 simule un jeu de dés.  L'utilisateur doit parier sur le résultat
@@ -46,7 +47,7 @@ public class Tp2_1
     
     /**
      * Afficher les choix des paris possibles (menu) et saisir le pari.  Valider le pari
-     * pour qu'il corresponde à un choix valide (1, 2 ou 3) et retourner le pari.
+     * pour qu'il corresponde à un choix valide (1, 2, 3 ou 4) et retourner le pari.
      * 
      * @param  menu   le menu qui montre les choix possible
      * @return pari   le pari que l'utilisateur a entré 
@@ -54,14 +55,14 @@ public class Tp2_1
     public static int lireLePari (String menu)
     {
         int pari;                   // Numéro du pari entré par l'utilisateur
-        final int NO_PARI_MIN = 1;  // Numéros de pari valides sont de 1 à 3, donc min 1
-        final int NO_PARI_MAX = 3;  // Numéros de pari valides sont de 1 à 3, donc max 3
+        final int NO_PARI_MIN = 1;  // Numéros de pari valides sont de 1 à 4, donc min 1
+        final int NO_PARI_MAX = 4;  // Numéros de pari valides sont de 1 à 4, donc max 4
         
         // Afficher le menu et demander à l'utilisateur d'entrer son pari.
         //
         pari = questionRepInt ( menu );
         
-        // Valider le pari pour qu'il corresponde à un choix valide (1 à 3)
+        // Valider le pari pour qu'il corresponde à un choix valide (1 à 4)
         //
         while ( pari < NO_PARI_MIN || pari > NO_PARI_MAX ) {
             System.out.println ( MessagesTp2.MESS_ERREUR_PARI );
@@ -169,6 +170,7 @@ public class Tp2_1
         final int GAIN_PARI_1 = 10;     // Gain en crédits pour pari 1
         final int GAIN_PARI_2 = 2;      // Gain en crédits pour pari 2
         final int GAIN_PARI_3 = 5;      // Gain en crédits pour pari 3
+        final int GAIN_PARI_4 = 3;		// Gain en crédits pour pari 4
         final int NO_PARI_PAREILS = 1;  // Numéro du pari pour les dés pareils
         final int NO_PARI_DIFF = 2;     // Numéro du pari pour les dés différents
         
@@ -180,6 +182,8 @@ public class Tp2_1
             if ( sontDifferents ( de1, de2, de3 ) ) {
                 nbFoisMise = GAIN_PARI_2;
             }
+        } else if ( sommeDes( de1, de2, de3) <= 7 ) {
+        	nbFoisMise = GAIN_PARI_4;
         } else if ( sontUneSuite ( de1, de2, de3 ) ) {
             nbFoisMise = GAIN_PARI_3;
         }
@@ -227,7 +231,18 @@ public class Tp2_1
         }
         
     } // sontDifferents
-    
+
+    /**
+     * Méthode retournant la somme de la valeur des 3 dés
+     * @param de1	valeur de dé 1
+     * @param de2	valeur de dé 2
+     * @param de3	valeur de dé 3
+     * @return		la somme de la valeur des 3 dés
+     */
+    public static int sommeDes ( int de1, int de2, int de3 ) 
+    {
+    	return de1 + de2 + de3;
+    }
     
     /**
      * Méthode qui détermine si les dés correspondent à une suite.  Si c'est le cas,
@@ -339,7 +354,7 @@ public class Tp2_1
         int de2;
         int de3;
         boolean deRelance = false;          // Indique si un des dés a été relancé
-        final int CREDIT_PAR_LANCER = 2;   // Il en coûte 2 crédits pour relancer un dé
+        final int CREDIT_PAR_LANCER = 3;   // Il en coûte 3 crédits pour relancer un dé
                 
         // Lancer les 3 dés et afficher le résultat
         //
@@ -349,7 +364,7 @@ public class Tp2_1
         afficherLesDes ( de1, de2, de3 );
         
         // Pour chaque dé, demander si le joueur désire relancer le dé une deuxième fois.
-        // Il doit avoir au moins 2 crédits en main pour avoir la possibilité de relancer un dé.
+        // Il doit avoir au moins 3 crédits en main pour avoir la possibilité de relancer un dé.
         //
         if ( creditsEnMain >= CREDIT_PAR_LANCER && 
              reponseEstOui ( MessagesTp2.MESS_RELANCER + "1 ? " ) ) {

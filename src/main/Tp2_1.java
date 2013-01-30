@@ -1,5 +1,12 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * La classe Tp2 simule un jeu de dés.  L'utilisateur doit parier sur le résultat
  * du lancer de trois dés effectués par l'ordinateur.  Ce montant misé est déduit 
@@ -103,14 +110,14 @@ public class Tp2_1
         return mise;
         
     } // lireLaMise
-
+    
     
     /**
      * Une question est posée au joueur et le joueur doit répondre soit par oui ou
      * par non.  La méthode valide la réponse et retourne une valeur booléenne pour 
      * indiquer si la réponse est affirmative ou négative.
      * 
-     * @param  question     question qui sera posée au joueur
+     * @param  question     question qui sera posée au joueur 
      * @return repOui       true si le joueur a répondu par l'affirmative à la question
      */    
     public static boolean reponseEstOui (String question)
@@ -121,7 +128,7 @@ public class Tp2_1
         reponse = questionRepString ( question ).toUpperCase();
             
         while ( !(reponse.equals("O") || reponse.equals("OUI") || 
-                  reponse.equals("N") || reponse.equals("NON")) ) {
+                  reponse.equals("N")  || reponse.equals("NON")) ) {
             System.out.println ( MessagesTp2.MESS_ERREUR_OUI_NON );
             reponse = questionRepString ( question ).toUpperCase();
         } // while
@@ -131,9 +138,8 @@ public class Tp2_1
         } else {
             repOui = false;
         }
-
+		
         return repOui;
-        
     } // reponseEstOui
     
  
@@ -439,6 +445,63 @@ public class Tp2_1
         
     } // afficherNomJeu    
     
+    //TODO JavaDoc
+    public static String determinerEtat ( String question ) 
+    {
+        String etat;
+           
+        etat = questionRepString ( question ).toUpperCase();
+            
+        while ( !( etat.equals("P") 
+        		|| etat.equals("E") 
+        		|| etat.equals("Q") ) ) {
+        	
+            System.out.println ( MessagesTp2.MESS_ERREUR_PEQ );
+            etat = questionRepString ( question ).toUpperCase();
+        } // while
+        		
+        return etat;
+    }
+    
+    
+    // TODO JavaDoc
+    public static void enregistrerPartie ( int credits, String fichier )
+    {    	
+    	try {
+    		BufferedWriter out = new BufferedWriter(new FileWriter(fichier), Integer.SIZE);
+    		out.write(String.valueOf(credits));
+    		out.close();
+    	}
+    	catch ( IOException e ) {   		
+    		System.out.println(e.getMessage());
+    	} 
+    }
+    
+    // TODO Javadoc
+    public static int initCredits ( String fichier )
+    {   
+    	int credits = -1;
+    	try {    		
+    		BufferedReader in = new BufferedReader(new FileReader(fichier), Integer.SIZE);
+    		File chemin = new File( fichier );
+    		credits = Integer.parseInt(in.readLine());
+			in.close();
+			chemin.delete();
+    	}
+    	catch ( IOException e ) {
+    		System.out.println(e.getMessage());
+    	}
+    	
+    	return credits;
+    }
+    
+    // TODO Javadoc
+    public static boolean fichierExiste ( String fichier )
+    {
+    	File f = new File(fichier);
+    	return f.exists();   	
+    }
+    
     
     public static void main ( String[] params ) {
         
@@ -446,8 +509,12 @@ public class Tp2_1
         //
         int pari;                   // Le numéro du pari, peut être 1, 2 ou 3. Voir menu
         int creditsMises;           // Le nombre de crédits que le joueur désire miser
-        int creditsEnMain = 100;    // Le joueur débute la partie avec 100 crédits en main
-        
+        int creditsEnMain;    // Le joueur débute la partie avec 100 crédits en main
+        String etatJeu;
+        final String JOUER = "P";
+        final String ENREGISTRER = "E";
+        final String CHEMIN = "save/credits.txt";
+
         // Afficher le nom du jeu
         //
         afficherNomJeu ();
@@ -456,11 +523,34 @@ public class Tp2_1
         //
         Aleatoire.initialiserLesDes ( questionRepInt ( MessagesTp2.MESS_INITIALISER ) );
         
+        // Si un fichier de persistance existe, demander à l'utilisateur 
+        // s'il veut reprendre la partie
+        //
+        if ( fichierExiste( CHEMIN )
+        		&& reponseEstOui( MessagesTp2.MESS_LOAD ) ) {
+        	
+        	creditsEnMain = initCredits(CHEMIN);
+        	
+        	if (creditsEnMain < 0) {
+        	
+        		creditsEnMain = 100;
+        	
+        	}
+        	
+        } else {
+        	
+        	creditsEnMain = 100;
+        }
+        
+        // Déterminer d'abord si le joueur veut jouer
+        //
+        etatJeu = determinerEtat( MessagesTp2.MESS_VEUT_JOUER );
+        
         // Boucle principale du jeu.
         // L'utilisateur peut jouer tant qu'il a suffisamment de crédit en main et qu'il
         // manifeste son désir de jouer
         //
-        while ( creditsEnMain > 0 && reponseEstOui ( MessagesTp2.MESS_VEUT_JOUER ) ) {
+        while ( creditsEnMain > 0 && etatJeu.equals(JOUER) ) {
             
             // Lire et valider le pari
             //
@@ -480,9 +570,22 @@ public class Tp2_1
             //
             creditsEnMain = determinerResultPari ( creditsEnMain, pari, creditsMises );
             
+            // Vérifier si le joueur désire continuer la partie
+            //
+            etatJeu = determinerEtat( MessagesTp2.MESS_VEUT_JOUER );
+            
         } // while
         
         afficherFinPartie ( creditsEnMain );
+        
+        // Si l'option de sauvegarde est choisie, le nombre de crédits que 
+        // l'utilisateur détient sera sauvegardé
+        //
+        if ( etatJeu.equals( ENREGISTRER ) ) {
+        	
+        	enregistrerPartie( creditsEnMain, CHEMIN );
+        	
+        } // if
         
     } // main
 }

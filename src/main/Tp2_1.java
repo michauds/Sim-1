@@ -8,23 +8,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * La classe Tp2 simule un jeu de dés.  L'utilisateur doit parier sur le résultat
- * du lancer de trois dés effectués par l'ordinateur.  Ce montant misé est déduit 
- * de ce qu'il a en main.  L'ordinateur lance les dés.  L'utilisateur à le choix 
- * de relancer chacun des dés une seule fois.  Ensuite, si le résultat final du 
- * lancer des dés correspond à ce que l'utilisateur a parié, il empoche un certain
- * nombre de crédits.  La partie termine lorsque le joueur n'a plus de crédit en
- * main ou lorsqu'il manifeste son désir de mettre fin à la partie.
+ * La classe Tp2 simule un jeu de dï¿½s.  L'utilisateur doit parier sur le rï¿½sultat
+ * du lancer de trois dï¿½s effectuï¿½s par l'ordinateur.  Ce montant misï¿½ est dï¿½duit 
+ * de ce qu'il a en main.  L'ordinateur lance les dï¿½s.  L'utilisateur ï¿½ le choix 
+ * de relancer chacun des dï¿½s une seule fois.  Ensuite, si le rï¿½sultat final du 
+ * lancer des dï¿½s correspond ï¿½ ce que l'utilisateur a pariï¿½, il empoche un certain
+ * nombre de crï¿½dits.  La partie termine lorsque le joueur n'a plus de crï¿½dit en
+ * main ou lorsqu'il manifeste son dï¿½sir de mettre fin ï¿½ la partie.
  * 
  */
 public class Tp2_1
 {
 
     /**
-     * Une question est affichée à l'écran et l'utilisateur doit y répondre par un
+     * Une question est affichï¿½e ï¿½ l'ï¿½cran et l'utilisateur doit y rï¿½pondre par un
      * nombre entier.
      * 
-     * @param  question   question qui sera affichée à l'écran
+     * @param  question   question qui sera affichï¿½e ï¿½ l'ï¿½cran
      * @return            le nombre entier lu
      */
     public static int questionRepInt (String question)
@@ -37,11 +37,11 @@ public class Tp2_1
 
     
     /**
-     * Une question est affichée à l'écran et l'utilisateur doit y répondre par une
-     * chaîne de caractères.
+     * Une question est affichï¿½e ï¿½ l'ï¿½cran et l'utilisateur doit y rï¿½pondre par une
+     * chaï¿½ne de caractï¿½res.
      * 
-     * @param  question   question qui sera affichée à l'écran
-     * @return            la chaine de caractère lue    
+     * @param  question   question qui sera affichï¿½e ï¿½ l'ï¿½cran
+     * @return            la chaine de caractï¿½re lue    
      */
     public static String questionRepString (String question)
     {
@@ -54,22 +54,22 @@ public class Tp2_1
     
     /**
      * Afficher les choix des paris possibles (menu) et saisir le pari.  Valider le pari
-     * pour qu'il corresponde à un choix valide (1, 2, 3 ou 4) et retourner le pari.
+     * pour qu'il corresponde ï¿½ un choix valide (1, 2, 3 ou 4) et retourner le pari.
      * 
      * @param  menu   le menu qui montre les choix possible
-     * @return pari   le pari que l'utilisateur a entré 
+     * @return pari   le pari que l'utilisateur a entrï¿½ 
      */
     public static int lireLePari (String menu)
     {
-        int pari;                   // Numéro du pari entré par l'utilisateur
-        final int NO_PARI_MIN = 1;  // Numéros de pari valides sont de 1 à 4, donc min 1
-        final int NO_PARI_MAX = 4;  // Numéros de pari valides sont de 1 à 4, donc max 4
+        int pari;                   // Numï¿½ro du pari entrï¿½ par l'utilisateur
+        final int NO_PARI_MIN = 1;  // Numï¿½ros de pari valides sont de 1 ï¿½ 4, donc min 1
+        final int NO_PARI_MAX = 4;  // Numï¿½ros de pari valides sont de 1 ï¿½ 4, donc max 4
         
-        // Afficher le menu et demander à l'utilisateur d'entrer son pari.
+        // Afficher le menu et demander ï¿½ l'utilisateur d'entrer son pari.
         //
         pari = questionRepInt ( menu );
         
-        // Valider le pari pour qu'il corresponde à un choix valide (1 à 4)
+        // Valider le pari pour qu'il corresponde ï¿½ un choix valide (1 ï¿½ 4)
         //
         while ( pari < NO_PARI_MIN || pari > NO_PARI_MAX ) {
             System.out.println ( MessagesTp2.MESS_ERREUR_PARI );
@@ -82,25 +82,25 @@ public class Tp2_1
 
     
     /**
-     * Demander à l'utilisateur d'entrer sa mise (nombre de crédits).  Valider la mise 
-     * pour qu'elle soit supérieur à 0 et inférieur ou égale au nombre de crédits en main
+     * Demander ï¿½ l'utilisateur d'entrer sa mise (nombre de crï¿½dits).  Valider la mise 
+     * pour qu'elle soit supï¿½rieur ï¿½ 0 et infï¿½rieur ou ï¿½gale au nombre de crï¿½dits en main
      * et retourner la mise.
      * 
-     * @param  combienMise   question pour connaître la mise du joueur
-     * @param  max           nombre de crédits maximum que le joueur peut miser (crédits en main)
-     * @return mise          nombre de crédits misés par le joueur pour le prochain pari
+     * @param  combienMise   question pour connaï¿½tre la mise du joueur
+     * @param  max           nombre de crï¿½dits maximum que le joueur peut miser (crï¿½dits en main)
+     * @return mise          nombre de crï¿½dits misï¿½s par le joueur pour le prochain pari
      */
     public static int lireLaMise (String combienMise, int max)
     {
-        int mise;                // Mise que le joueur a entrée
-        final int MISE_MIN = 1;  // Nombre minimum de crédit à miser est 1
+        int mise;                // Mise que le joueur a entrï¿½e
+        final int MISE_MIN = 1;  // Nombre minimum de crï¿½dit ï¿½ miser est 1
         
-        // Demander à l'utilisateur d'entrer sa mise.
+        // Demander ï¿½ l'utilisateur d'entrer sa mise.
         //
         mise = questionRepInt ( combienMise );
         
-        // Valider la mise pour qu'elle soit supérieure à 0 et inférieure ou égale 
-        // au nombre maximum de crédits pouvant être misés
+        // Valider la mise pour qu'elle soit supï¿½rieure ï¿½ 0 et infï¿½rieure ou ï¿½gale 
+        // au nombre maximum de crï¿½dits pouvant ï¿½tre misï¿½s
         //
         while ( mise < MISE_MIN || mise > max ) {
             System.out.println ( MessagesTp2.MESS_ERREUR_MISE );
@@ -113,12 +113,12 @@ public class Tp2_1
     
     
     /**
-     * Une question est posée au joueur et le joueur doit répondre soit par oui ou
-     * par non.  La méthode valide la réponse et retourne une valeur booléenne pour 
-     * indiquer si la réponse est affirmative ou négative.
+     * Une question est posï¿½e au joueur et le joueur doit rï¿½pondre soit par oui ou
+     * par non.  La mï¿½thode valide la rï¿½ponse et retourne une valeur boolï¿½enne pour 
+     * indiquer si la rï¿½ponse est affirmative ou nï¿½gative.
      * 
-     * @param  question     question qui sera posée au joueur 
-     * @return repOui       true si le joueur a répondu par l'affirmative à la question
+     * @param  question     question qui sera posï¿½e au joueur 
+     * @return repOui       true si le joueur a rï¿½pondu par l'affirmative ï¿½ la question
      */    
     public static boolean reponseEstOui (String question)
     {
@@ -144,41 +144,43 @@ public class Tp2_1
     
  
     /**
-     * Méthode qui affiche le résultat des 3 dés lancés.
+     * Mï¿½thode qui affiche le rï¿½sultat des 3 dï¿½s lancï¿½s.
      *
-     * @param  de1      résultat du dé1
-     * @param  de2      résultat du dé2
-     * @param  de3      résultat du dé3
+     * @param  de1      rï¿½sultat du dï¿½1
+     * @param  de2      rï¿½sultat du dï¿½2
+     * @param  de3      rï¿½sultat du dï¿½3
      * @return 
      */    
-    public static void afficherLesDes (int de1, int de2, int de3)
+    public static void afficherLesDes (int de1, int de2, int de3, int choix)
     {
-        final String MESS_VOICI_LES_DES = "\nVoici les trois dés : ";
-         
-        System.out.println ( MESS_VOICI_LES_DES + de1 + " " + de2 + " " + de3 + "\n ");
-        
+        final String MESS_VOICI_LES_DES = "\nVoici les trois dï¿½s : ";
+        if(choix == 4)  {
+        System.out.println ( MESS_VOICI_LES_DES + de1 + " + " + de2 + " + " + de3 + " = " + sommeDes(de1,de2,de3) + "\n ");
+        }else{
+            System.out.println ( MESS_VOICI_LES_DES + de1 + "  " + de2 + "  " + de3 + " \n ");
+        }
     } // afficherLesDes
     
 
     /**
-     * Cette méthode détermine s'il y a gain.  Si c'est le cas, elle évalue
-     * à combien de fois la mise le gain correspond.
+     * Cette mï¿½thode dï¿½termine s'il y a gain.  Si c'est le cas, elle ï¿½value
+     * ï¿½ combien de fois la mise le gain correspond.
      * 
-     * @param  de1      résultat du dé 1
-     * @param  de2      résultat du dé 2
-     * @param  de3      résultat du dé 3
-     * @param  pari     le numéro du pari que le joueur a choisi
+     * @param  de1      rï¿½sultat du dï¿½ 1
+     * @param  de2      rï¿½sultat du dï¿½ 2
+     * @param  de3      rï¿½sultat du dï¿½ 3
+     * @param  pari     le numï¿½ro du pari que le joueur a choisi
      * @return nbFoisMise   le nombre de fois la mise selon le gain
      */    
     public static int determineNbFoisMise (int de1, int de2, int de3, int pari)
     {
         int nbFoisMise = 0;             // Nombre de fois la mise
-        final int GAIN_PARI_1 = 10;     // Gain en crédits pour pari 1
-        final int GAIN_PARI_2 = 2;      // Gain en crédits pour pari 2
-        final int GAIN_PARI_3 = 5;      // Gain en crédits pour pari 3
-        final int GAIN_PARI_4 = 3;		// Gain en crédits pour pari 4
-        final int NO_PARI_PAREILS = 1;  // Numéro du pari pour les dés pareils
-        final int NO_PARI_DIFF = 2;     // Numéro du pari pour les dés différents
+        final int GAIN_PARI_1 = 10;     // Gain en crï¿½dits pour pari 1
+        final int GAIN_PARI_2 = 2;      // Gain en crï¿½dits pour pari 2
+        final int GAIN_PARI_3 = 5;      // Gain en crï¿½dits pour pari 3
+        final int GAIN_PARI_4 = 3;		// Gain en crï¿½dits pour pari 4
+        final int NO_PARI_PAREILS = 1;  // Numï¿½ro du pari pour les dï¿½s pareils
+        final int NO_PARI_DIFF = 2;     // Numï¿½ro du pari pour les dï¿½s diffï¿½rents
         
         if ( pari == NO_PARI_PAREILS ) {
             if ( sontPareils ( de1, de2, de3 ) ) {
@@ -200,13 +202,13 @@ public class Tp2_1
     
     
     /**
-     * Méthode qui détermine si les dés sont tous pareils.  Si c'est le cas,
-     * la méthode retourne 'true', sinon elle retourne 'false'.
+     * Mï¿½thode qui dï¿½termine si les dï¿½s sont tous pareils.  Si c'est le cas,
+     * la mï¿½thode retourne 'true', sinon elle retourne 'false'.
      * 
-     * @param  de1      résultat du dé 1
-     * @param  de2      résultat du dé 2
-     * @param  de3      résultat du dé 3
-     * @return          true si les dés sont pareils, sinon false est retourné 
+     * @param  de1      rï¿½sultat du dï¿½ 1
+     * @param  de2      rï¿½sultat du dï¿½ 2
+     * @param  de3      rï¿½sultat du dï¿½ 3
+     * @return          true si les dï¿½s sont pareils, sinon false est retournï¿½ 
      */
     public static boolean sontPareils ( int de1, int de2, int de3 )
     {
@@ -220,13 +222,13 @@ public class Tp2_1
 
     
     /**
-     * Méthode qui détermine si les dés sont tous différents.  Si c'est le cas,
-     * la méthode retourne 'true', sinon elle retourne 'false'.
+     * Mï¿½thode qui dï¿½termine si les dï¿½s sont tous diffï¿½rents.  Si c'est le cas,
+     * la mï¿½thode retourne 'true', sinon elle retourne 'false'.
      * 
-     * @param  de1      résultat du dé 1
-     * @param  de2      résultat du dé 2
-     * @param  de3      résultat du dé 3
-     * @return          true si les dés sont différents, sinon false est retourné 
+     * @param  de1      rï¿½sultat du dï¿½ 1
+     * @param  de2      rï¿½sultat du dï¿½ 2
+     * @param  de3      rï¿½sultat du dï¿½ 3
+     * @return          true si les dï¿½s sont diffï¿½rents, sinon false est retournï¿½ 
      */
     public static boolean sontDifferents ( int de1, int de2, int de3 )
     {
@@ -239,11 +241,11 @@ public class Tp2_1
     } // sontDifferents
 
     /**
-     * Méthode retournant la somme de la valeur des 3 dés
-     * @param de1	valeur de dé 1
-     * @param de2	valeur de dé 2
-     * @param de3	valeur de dé 3
-     * @return		la somme de la valeur des 3 dés
+     * Mï¿½thode retournant la somme de la valeur des 3 dï¿½s
+     * @param de1	valeur de dï¿½ 1
+     * @param de2	valeur de dï¿½ 2
+     * @param de3	valeur de dï¿½ 3
+     * @return		la somme de la valeur des 3 dï¿½s
      */
     public static int sommeDes ( int de1, int de2, int de3 ) 
     {
@@ -251,28 +253,28 @@ public class Tp2_1
     }
     
     /**
-     * Méthode qui détermine si les dés correspondent à une suite.  Si c'est le cas,
-     * la méthode retourne 'true', sinon elle retourne 'false'.
+     * Mï¿½thode qui dï¿½termine si les dï¿½s correspondent ï¿½ une suite.  Si c'est le cas,
+     * la mï¿½thode retourne 'true', sinon elle retourne 'false'.
      * 
-     * @param  de1      résultat du dé 1
-     * @param  de2      résultat du dé 2
-     * @param  de3      résultat du dé 3
-     * @return          true si les dés correspondent à une suite, sinon false est retourné 
+     * @param  de1      rï¿½sultat du dï¿½ 1
+     * @param  de2      rï¿½sultat du dï¿½ 2
+     * @param  de3      rï¿½sultat du dï¿½ 3
+     * @return          true si les dï¿½s correspondent ï¿½ une suite, sinon false est retournï¿½ 
      */
     public static boolean sontUneSuite ( int de1, int de2, int de3 )
     {
         
-        int premChiffre = 0;    // Le dé ayant le plus petit chiffre
+        int premChiffre = 0;    // Le dï¿½ ayant le plus petit chiffre
         
-        // Trouver le chiffre le plus petit des 3 dés
+        // Trouver le chiffre le plus petit des 3 dï¿½s
         //
         premChiffre = Math.min ( de1, de2 );
         premChiffre = Math.min ( premChiffre, de3 );
         
-        // Vérifier si un dé correspond au chiffre suivant du plus petit trouvé précédemment
+        // Vï¿½rifier si un dï¿½ correspond au chiffre suivant du plus petit trouvï¿½ prï¿½cï¿½demment
         //
         if ( premChiffre + 1 == de1 || premChiffre + 1 == de2 || premChiffre + 1 == de3 ) {
-            // Vérifier si un dé correspond au 2ième chiffre suivant le plus petit trouvé précédemment
+            // Vï¿½rifier si un dï¿½ correspond au 2iï¿½me chiffre suivant le plus petit trouvï¿½ prï¿½cï¿½demment
             //
             if ( premChiffre + 2 == de1 || premChiffre + 2 == de2 || premChiffre + 2 == de3 ) {
                 return true;
@@ -287,23 +289,23 @@ public class Tp2_1
 
     
     /**
-     * Méthode qui réévalue le nombre de crédits en main selon le nombre de crédits
-     * misés et le gain (nombre de fois la mise).  Le nombre de crédits en main 
-     * réévalué est retourné.
+     * Mï¿½thode qui rï¿½ï¿½value le nombre de crï¿½dits en main selon le nombre de crï¿½dits
+     * misï¿½s et le gain (nombre de fois la mise).  Le nombre de crï¿½dits en main 
+     * rï¿½ï¿½valuï¿½ est retournï¿½.
      * 
-     * @param  enMain        le nombre de crédits dont dispose le joueur
-     * @param  crMises       le nombre de crédits que le joueur a misé
-     * @param  nbFoisLaMise  gain représenté en nombre de fois la mise
-     * @return               le nombre de crédits en main réévalué
+     * @param  enMain        le nombre de crï¿½dits dont dispose le joueur
+     * @param  crMises       le nombre de crï¿½dits que le joueur a misï¿½
+     * @param  nbFoisLaMise  gain reprï¿½sentï¿½ en nombre de fois la mise
+     * @return               le nombre de crï¿½dits en main rï¿½ï¿½valuï¿½
      */
     public static int calculerCreditsEnMain ( int enMain, int crMises, int nbFoisLaMise )
     {
-        int gainEnCredits;          // Gain calculé en nombre de crédits
-        final String MESS_CREDITS = " crédits."; 
+        int gainEnCredits;          // Gain calculï¿½ en nombre de crï¿½dits
+        final String MESS_CREDITS = " crï¿½dits."; 
 
-        //  Si le nombre de fois la mise est égale à 0, ça indique que le joueur
-        //  a perdu et un message en ce sens est affiché.  Sinon, le nombre de
-        //  crédits en main est réévalué.
+        //  Si le nombre de fois la mise est ï¿½gale ï¿½ 0, ï¿½a indique que le joueur
+        //  a perdu et un message en ce sens est affichï¿½.  Sinon, le nombre de
+        //  crï¿½dits en main est rï¿½ï¿½valuï¿½.
         //
         if ( nbFoisLaMise == 0 ) {
             afficherResultPari ( MessagesTp2.MESS_PERDU, enMain );
@@ -319,18 +321,18 @@ public class Tp2_1
         
     
     /**
-     * Méthode qui affiche s'il s'agit d'un gain ou non et qui affiche le nombre
-     * de crédits dont le joueur dispose.
+     * Mï¿½thode qui affiche s'il s'agit d'un gain ou non et qui affiche le nombre
+     * de crï¿½dits dont le joueur dispose.
      * 
-     * @param  message      message à afficher
-     * @param  enMain       nombre de crédits en main
+     * @param  message      message ï¿½ afficher
+     * @param  enMain       nombre de crï¿½dits en main
      * @return     
      */
     public static void afficherResultPari ( String message, int enMain )
     {
         final String MESS_CREDITS_EN_MAIN = "\nVous disposez maintenant de ";
-        final String MESS_CREDIT = " crédit.";   
-        final String MESS_CREDITS = " crédits."; 
+        final String MESS_CREDIT = " crï¿½dit.";   
+        final String MESS_CREDITS = " crï¿½dits."; 
         
         System.out.print ( message );
         
@@ -345,32 +347,32 @@ public class Tp2_1
     
    
     /**
-     * Méthode principale du jeu.  Les dés sont lancés, le résultat des dés est évalué
-     * pour déterminer s'il y a gain.  Si c'est le cas, le gain est calculé en nombre
-     * de crédits et le nombre de crédits en main est ajusté.
+     * Mï¿½thode principale du jeu.  Les dï¿½s sont lancï¿½s, le rï¿½sultat des dï¿½s est ï¿½valuï¿½
+     * pour dï¿½terminer s'il y a gain.  Si c'est le cas, le gain est calculï¿½ en nombre
+     * de crï¿½dits et le nombre de crï¿½dits en main est ajustï¿½.
      * 
-     * @param  creditsEnMain    crédits dont dispose le joueur
-     * @param  pari             numéro du pari que le joueur a choisi
-     * @param  creditsMises     le nombre de crédits misés par le joueur
-     * @return credit en main   le nombre de crédits dont le joueur dispose après le jeu
+     * @param  creditsEnMain    crï¿½dits dont dispose le joueur
+     * @param  pari             numï¿½ro du pari que le joueur a choisi
+     * @param  creditsMises     le nombre de crï¿½dits misï¿½s par le joueur
+     * @return credit en main   le nombre de crï¿½dits dont le joueur dispose aprï¿½s le jeu
      */    
     public static int determinerResultPari (int creditsEnMain, int pari, int creditsMises)
     {
         int de1;
         int de2;
         int de3;
-        boolean deRelance = false;          // Indique si un des dés a été relancé
-        final int CREDIT_PAR_LANCER = 3;   // Il en coûte 3 crédits pour relancer un dé
+        boolean deRelance = false;          // Indique si un des dï¿½s a ï¿½tï¿½ relancï¿½
+        final int CREDIT_PAR_LANCER = 3;   // Il en coï¿½te 3 crï¿½dits pour relancer un dï¿½
                 
-        // Lancer les 3 dés et afficher le résultat
+        // Lancer les 3 dï¿½s et afficher le rï¿½sultat
         //
         de1 = Aleatoire.lancerUnDe6();
         de2 = Aleatoire.lancerUnDe6();
         de3 = Aleatoire.lancerUnDe6();
-        afficherLesDes ( de1, de2, de3 );
+        afficherLesDes ( de1, de2, de3, pari );
         
-        // Pour chaque dé, demander si le joueur désire relancer le dé une deuxième fois.
-        // Il doit avoir au moins 3 crédits en main pour avoir la possibilité de relancer un dé.
+        // Pour chaque dï¿½, demander si le joueur dï¿½sire relancer le dï¿½ une deuxiï¿½me fois.
+        // Il doit avoir au moins 3 crï¿½dits en main pour avoir la possibilitï¿½ de relancer un dï¿½.
         //
         if ( creditsEnMain >= CREDIT_PAR_LANCER && 
              reponseEstOui ( MessagesTp2.MESS_RELANCER + "1 ? " ) ) {
@@ -390,16 +392,16 @@ public class Tp2_1
             creditsEnMain = creditsEnMain - CREDIT_PAR_LANCER;
             deRelance = true;
         }        
-        // Afficher le résultat des dés si au moins un des dés a été relancé
+        // Afficher le rï¿½sultat des dï¿½s si au moins un des dï¿½s a ï¿½tï¿½ relancï¿½
         //
         if ( deRelance ) {
-            afficherLesDes ( de1, de2, de3 );
+            afficherLesDes ( de1, de2, de3 , pari);
         } else {
             System.out.println ();
         }
         
-        // Selon le résultat du pari (determineNbFoisMise), calculer et retourner la nouvelle 
-        // valeur des crédits en main
+        // Selon le rï¿½sultat du pari (determineNbFoisMise), calculer et retourner la nouvelle 
+        // valeur des crï¿½dits en main
         //
         return calculerCreditsEnMain ( creditsEnMain, creditsMises, 
                                        determineNbFoisMise ( de1, de2, de3, pari ) );
@@ -408,16 +410,16 @@ public class Tp2_1
     
     
     /**
-     * Méthode qui affiche le nombre de crédits en main à la fin de la partie.
+     * Mï¿½thode qui affiche le nombre de crï¿½dits en main ï¿½ la fin de la partie.
      * 
-     * @param  creditEnMain     nombre de crédits dont le joueur dispose
+     * @param  creditEnMain     nombre de crï¿½dits dont le joueur dispose
      * @return  
      */
     public static void afficherFinPartie ( int creditEnMain )
     {
-        final String MESS_FIN_PARTIE = "\nVous avez terminé la partie avec ";
-        final String MESS_CREDIT = " crédit";   
-        final String MESS_CREDITS = " crédits"; 
+        final String MESS_FIN_PARTIE = "\nVous avez terminï¿½ la partie avec ";
+        final String MESS_CREDIT = " crï¿½dit";   
+        final String MESS_CREDITS = " crï¿½dits"; 
         
         System.out.print ( MESS_FIN_PARTIE + creditEnMain );
         if ( creditEnMain <= 1 ) {
@@ -430,14 +432,14 @@ public class Tp2_1
     
     
     /**
-     * Méthode qui affiche le nom du jeu.
+     * Mï¿½thode qui affiche le nom du jeu.
      * 
      * @param  
      * @return  
      */
     public static void afficherNomJeu ()
     {
-        final String MESS_DEBUT_PARTIE = "\nJEU DU LANCER DES DÉS\n";
+        final String MESS_DEBUT_PARTIE = "\nJEU DU LANCER DES Dï¿½S\n";
         final String MESS_DEBUT_SOULIGN = "=====================\n";
 
         System.out.print ( MESS_DEBUT_PARTIE );
@@ -505,11 +507,11 @@ public class Tp2_1
     
     public static void main ( String[] params ) {
         
-        // Déclaration des variables
+        // Dï¿½claration des variables
         //
-        int pari;                   // Le numéro du pari, peut être 1, 2 ou 3. Voir menu
-        int creditsMises;           // Le nombre de crédits que le joueur désire miser
-        int creditsEnMain;    // Le joueur débute la partie avec 100 crédits en main
+        int pari;                   // Le numï¿½ro du pari, peut ï¿½tre 1, 2 ou 3. Voir menu
+        int creditsMises;           // Le nombre de crï¿½dits que le joueur dï¿½sire miser
+        int creditsEnMain;    // Le joueur dï¿½bute la partie avec 100 crï¿½dits en main
         String etatJeu;
         final String JOUER = "P";
         final String ENREGISTRER = "E";
@@ -519,11 +521,11 @@ public class Tp2_1
         //
         afficherNomJeu ();
         
-        // Initialiser le processus aléatoire à l'aide d'un nombre saisi par l'utilisateur
+        // Initialiser le processus alï¿½atoire ï¿½ l'aide d'un nombre saisi par l'utilisateur
         //
         Aleatoire.initialiserLesDes ( questionRepInt ( MessagesTp2.MESS_INITIALISER ) );
         
-        // Si un fichier de persistance existe, demander à l'utilisateur 
+        // Si un fichier de persistance existe, demander ï¿½ l'utilisateur 
         // s'il veut reprendre la partie
         //
         if ( fichierExiste( CHEMIN )
@@ -542,13 +544,13 @@ public class Tp2_1
         	creditsEnMain = 100;
         }
         
-        // Déterminer d'abord si le joueur veut jouer
+        // Dï¿½terminer d'abord si le joueur veut jouer
         //
         etatJeu = determinerEtat( MessagesTp2.MESS_VEUT_JOUER );
         
         // Boucle principale du jeu.
-        // L'utilisateur peut jouer tant qu'il a suffisamment de crédit en main et qu'il
-        // manifeste son désir de jouer
+        // L'utilisateur peut jouer tant qu'il a suffisamment de crï¿½dit en main et qu'il
+        // manifeste son dï¿½sir de jouer
         //
         while ( creditsEnMain > 0 && etatJeu.equals(JOUER) ) {
             
@@ -556,21 +558,21 @@ public class Tp2_1
             //
             pari = lireLePari ( "\n" + MessagesTp2.MENU );
             
-            // Lire et valider la mise.  La mise doit être supérieur à 0 et inférieur
-            // ou égale au nombre de crédits en main.
+            // Lire et valider la mise.  La mise doit ï¿½tre supï¿½rieur ï¿½ 0 et infï¿½rieur
+            // ou ï¿½gale au nombre de crï¿½dits en main.
             //
             creditsMises = lireLaMise ( "\n" + MessagesTp2.MESS_COMBIEN_MISE, creditsEnMain );
             
-            // Déduire les crédits misés du nombre de crédits en main
+            // Dï¿½duire les crï¿½dits misï¿½s du nombre de crï¿½dits en main
             //
             creditsEnMain = creditsEnMain - creditsMises;
             
-            // Jouer les dés et déterminer le résultat du pari.  Ré-évaluer les crédits
-            // en main selon le résultat du pari.
+            // Jouer les dï¿½s et dï¿½terminer le rï¿½sultat du pari.  Rï¿½-ï¿½valuer les crï¿½dits
+            // en main selon le rï¿½sultat du pari.
             //
             creditsEnMain = determinerResultPari ( creditsEnMain, pari, creditsMises );
             
-            // Vérifier si le joueur désire continuer la partie
+            // Vï¿½rifier si le joueur dï¿½sire continuer la partie
             //
             etatJeu = determinerEtat( MessagesTp2.MESS_VEUT_JOUER );
             
@@ -578,8 +580,8 @@ public class Tp2_1
         
         afficherFinPartie ( creditsEnMain );
         
-        // Si l'option de sauvegarde est choisie, le nombre de crédits que 
-        // l'utilisateur détient sera sauvegardé
+        // Si l'option de sauvegarde est choisie, le nombre de crï¿½dits que 
+        // l'utilisateur dï¿½tient sera sauvegardï¿½
         //
         if ( etatJeu.equals( ENREGISTRER ) ) {
         	

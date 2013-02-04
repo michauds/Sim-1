@@ -5,11 +5,11 @@ import java.util.*;
  * Generation de nombres aleatoires.
  * 
  * @author Louise Laforest 
- * @version octobre 2008
+ * @version janvier 2013
  */
 public class Aleatoire {
 
-    private static int germe = 25;     // valeur initiale qui peut etre changee avec initialiserLesDes
+    private static final int germe = 25;     // valeur initiale qui peut etre changee avec initialiserLesDes
     private static Random generateur = new Random ( germe );
     
     /**

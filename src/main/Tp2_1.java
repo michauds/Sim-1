@@ -20,6 +20,8 @@ import java.io.IOException;
 public class Tp2_1
 {
 
+    public static AffichageFrame unAffichage; 
+    
     /**
      * Une question est affich�e � l'�cran et l'utilisateur doit y r�pondre par un
      * nombre entier.
@@ -29,9 +31,9 @@ public class Tp2_1
      */
     public static int questionRepInt (String question)
     {
-        System.out.print ( question );
+        unAffichage.TextArea.append ( question );
        
-        return Clavier.lireIntLn ();
+        return Clavier.lireInt ();
         
     } // questionRepInt
 
@@ -45,7 +47,7 @@ public class Tp2_1
      */
     public static String questionRepString (String question)
     {
-        System.out.print ( question );
+        unAffichage.TextArea.append ( question );
        
         return Clavier.lireString ();
         
@@ -72,7 +74,7 @@ public class Tp2_1
         // Valider le pari pour qu'il corresponde � un choix valide (1 � 4)
         //
         while ( pari < NO_PARI_MIN || pari > NO_PARI_MAX ) {
-            System.out.println ( MessagesTp2.MESS_ERREUR_PARI );
+            unAffichage.AfficheErreur ( MessagesTp2.MESS_ERREUR_PARI );
             pari = questionRepInt ( menu );    
         } // while
 
@@ -103,7 +105,7 @@ public class Tp2_1
         // au nombre maximum de cr�dits pouvant �tre mis�s
         //
         while ( mise < MISE_MIN || mise > max ) {
-            System.out.println ( MessagesTp2.MESS_ERREUR_MISE );
+            unAffichage.AfficheErreur ( MessagesTp2.MESS_ERREUR_MISE );
             mise = questionRepInt ( combienMise );    
         } // while
 
@@ -129,7 +131,7 @@ public class Tp2_1
             
         while ( !(reponse.equals("O") || reponse.equals("OUI") || 
                   reponse.equals("N")  || reponse.equals("NON")) ) {
-            System.out.println ( MessagesTp2.MESS_ERREUR_OUI_NON );
+            unAffichage.AfficheErreur ( MessagesTp2.MESS_ERREUR_OUI_NON );
             reponse = questionRepString ( question ).toUpperCase();
         } // while
         
@@ -155,9 +157,9 @@ public class Tp2_1
     {
         final String MESS_VOICI_LES_DES = "\nVoici les trois d�s : ";
         if(choix == 4)  {
-        System.out.println ( MESS_VOICI_LES_DES + de1 + " + " + de2 + " + " + de3 + " = " + sommeDes(de1,de2,de3) + "\n ");
+        unAffichage.TextArea.append ( MESS_VOICI_LES_DES + de1 + " + " + de2 + " + " + de3 + " = " + sommeDes(de1,de2,de3) + "\n ");
         }else{
-            System.out.println ( MESS_VOICI_LES_DES + de1 + "  " + de2 + "  " + de3 + " \n ");
+            unAffichage.TextArea.append ( MESS_VOICI_LES_DES + de1 + "  " + de2 + "  " + de3 + " \n ");
         }
     } // afficherLesDes
     
@@ -334,13 +336,13 @@ public class Tp2_1
         final String MESS_CREDIT = " cr�dit.";   
         final String MESS_CREDITS = " cr�dits."; 
         
-        System.out.print ( message );
+        unAffichage.TextArea.append ( message );
         
-        System.out.print ( MESS_CREDITS_EN_MAIN + enMain );
+        unAffichage.TextArea.append ( MESS_CREDITS_EN_MAIN + enMain );
         if ( enMain > 1 ) {
-            System.out.println ( MESS_CREDITS );
+            unAffichage.TextArea.append ( MESS_CREDITS );
         } else {
-            System.out.println ( MESS_CREDIT );
+            unAffichage.TextArea.append ( MESS_CREDIT );
         }
         
     } // afficherResultPari
@@ -397,7 +399,7 @@ public class Tp2_1
         if ( deRelance ) {
             afficherLesDes ( de1, de2, de3 , pari);
         } else {
-            System.out.println ();
+            unAffichage.TextArea.append ("");
         }
         
         // Selon le r�sultat du pari (determineNbFoisMise), calculer et retourner la nouvelle 
@@ -421,11 +423,11 @@ public class Tp2_1
         final String MESS_CREDIT = " cr�dit";   
         final String MESS_CREDITS = " cr�dits"; 
         
-        System.out.print ( MESS_FIN_PARTIE + creditEnMain );
+        unAffichage.TextArea.append ( MESS_FIN_PARTIE + creditEnMain );
         if ( creditEnMain <= 1 ) {
-            System.out.println ( MESS_CREDIT );
+            unAffichage.TextArea.append ( MESS_CREDIT );
         } else {
-            System.out.println ( MESS_CREDITS );
+            unAffichage.TextArea.append ( MESS_CREDITS );
         }
         
     } // afficherFinPartie    
@@ -442,8 +444,8 @@ public class Tp2_1
         final String MESS_DEBUT_PARTIE = "\nJEU DU LANCER DES D�S\n";
         final String MESS_DEBUT_SOULIGN = "=====================\n";
 
-        System.out.print ( MESS_DEBUT_PARTIE );
-        System.out.println ( MESS_DEBUT_SOULIGN );
+        unAffichage.TextArea.append ( MESS_DEBUT_PARTIE );
+        unAffichage.TextArea.append ( MESS_DEBUT_SOULIGN );
         
     } // afficherNomJeu    
     
@@ -458,7 +460,7 @@ public class Tp2_1
         		|| etat.equals("E") 
         		|| etat.equals("Q") ) ) {
         	
-            System.out.println ( MessagesTp2.MESS_ERREUR_PEQ );
+            unAffichage.AfficheErreur( MessagesTp2.MESS_ERREUR_PEQ );
             etat = questionRepString ( question ).toUpperCase();
         } // while
         		
@@ -475,7 +477,7 @@ public class Tp2_1
     		out.close();
     	}
     	catch ( IOException e ) {   		
-    		System.out.println(e.getMessage());
+    		unAffichage.AfficheErreur(e.getMessage());
     	} 
     }
     
@@ -491,7 +493,7 @@ public class Tp2_1
 			chemin.delete();
     	}
     	catch ( IOException e ) {
-    		System.out.println(e.getMessage());
+    		unAffichage.AfficheErreur(e.getMessage());
     	}
     	
     	return credits;
@@ -517,6 +519,10 @@ public class Tp2_1
         final String ENREGISTRER = "E";
         final String CHEMIN = "save/credits.txt";
 
+        unAffichage = new AffichageFrame();
+        unAffichage.show(true);
+        unAffichage.TextArea.setEditable(false);
+        
         // Afficher le nom du jeu
         //
         afficherNomJeu ();

@@ -50,24 +50,6 @@ import java.io.*;
  
 public class Clavier {
 
-
-    public static void viderTampon() {
-       
-    /* antecedent : -
-     * consequent : Vide le tampon d'entree associe a la console.
-     */
-    
-        try {
-            System.in.skip( System.in.available() );
-        } catch( IOException e ) {
-            System.out.println ( "Le tampon d'entree ne peut etre vide." );
-        }
-
-    } // viderTampon
-    
-
-
-
     public static String lireString() {
 
     /*  antecedent : 
@@ -78,10 +60,16 @@ public class Clavier {
      *               Ni LF ni CR ne seront presents dans la chaine mais
      *               auront ete lus.
      */
-    
-        return lireMot();
+        maReponse = "";
+        while (maReponse.isEmpty())
+        {    
+            if (!maReponse.isEmpty())
+            {
+                return maReponse;
+            }
+        }
+        return maReponse;
     } // lireString
-
     
     public static int lireInt() { 
     
@@ -92,29 +80,19 @@ public class Clavier {
      *              Le nombre peut commencer par - (negatif) mais ne
      *              peut commencer par +.
      */
-    
-        return Integer.parseInt( lireMot() );
+        int resultat = 0;
+        try
+        {
+            resultat = Integer.parseInt( lireString() );
+        }
+        catch(Exception e)
+        {
+            Tp2_1.AfficheErreur( MessagesTp2.MESS_ERREUR_INVALID );
+            lireInt();
+        }
+        return resultat;
         
     } // lireInt
-    
-    private static String lireMot() {
-    
-    /* antecedent : -
-     * consequent : Retourne le mot lu, a partir du curseur.
-     *              Les separateurs (voir plus haut) de debut sont
-     *              ignores. La fin du mot est determinee par un sepa-
-     *              rateur. Le separateur qui suit le mot est lu.
-     *              Le curseur est rendu sur le premier caractere suiv-
-     *              ant le separateur ayant determine la fin du mot.
-     */
-        maReponse = "";
-        while (maReponse.isEmpty())
-        {
-        
-        }
-        return maReponse;
-        
-    } // lireMot
     
     public static String maReponse; // modifie par lireMot
                 

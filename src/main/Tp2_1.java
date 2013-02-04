@@ -7,6 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
+import javax.swing.*;
+
 /**
  * La classe Tp2 simule un jeu de dï¿½s.  L'utilisateur doit parier sur le rï¿½sultat
  * du lancer de trois dï¿½s effectuï¿½s par l'ordinateur.  Ce montant misï¿½ est dï¿½duit 
@@ -74,7 +80,8 @@ public class Tp2_1
         // Valider le pari pour qu'il corresponde ï¿½ un choix valide (1 ï¿½ 4)
         //
         while ( pari < NO_PARI_MIN || pari > NO_PARI_MAX ) {
-            unAffichage.AfficheErreur ( MessagesTp2.MESS_ERREUR_PARI );
+            AfficheErreur ( MessagesTp2.MESS_ERREUR_PARI );
+            unAffichage.effacer();
             pari = questionRepInt ( menu );    
         } // while
 
@@ -82,6 +89,10 @@ public class Tp2_1
         
     } // lireLePari
 
+    public static void AfficheErreur (String erreur)
+    {
+        unAffichage.AfficherErreur ( erreur );
+    }
     
     /**
      * Demander ï¿½ l'utilisateur d'entrer sa mise (nombre de crï¿½dits).  Valider la mise 
@@ -105,7 +116,8 @@ public class Tp2_1
         // au nombre maximum de crï¿½dits pouvant ï¿½tre misï¿½s
         //
         while ( mise < MISE_MIN || mise > max ) {
-            unAffichage.AfficheErreur ( MessagesTp2.MESS_ERREUR_MISE );
+            AfficheErreur ( MessagesTp2.MESS_ERREUR_MISE );
+            unAffichage.effacer();
             mise = questionRepInt ( combienMise );    
         } // while
 
@@ -131,7 +143,8 @@ public class Tp2_1
             
         while ( !(reponse.equals("O") || reponse.equals("OUI") || 
                   reponse.equals("N")  || reponse.equals("NON")) ) {
-            unAffichage.AfficheErreur ( MessagesTp2.MESS_ERREUR_OUI_NON );
+            AfficheErreur ( MessagesTp2.MESS_ERREUR_OUI_NON );
+            unAffichage.effacer();
             reponse = questionRepString ( question ).toUpperCase();
         } // while
         
@@ -155,12 +168,36 @@ public class Tp2_1
      */    
     public static void afficherLesDes (int de1, int de2, int de3, int choix)
     {
-        final String MESS_VOICI_LES_DES = "\nVoici les trois dï¿½s : ";
+        unAffichage.effacer();
+        final String MESS_VOICI_LES_DES = "\nVoici les trois dés : ";
         if(choix == 4)  {
         unAffichage.TextArea.append ( MESS_VOICI_LES_DES + de1 + " + " + de2 + " + " + de3 + " = " + sommeDes(de1,de2,de3) + "\n ");
         }else{
             unAffichage.TextArea.append ( MESS_VOICI_LES_DES + de1 + "  " + de2 + "  " + de3 + " \n ");
-        }
+        }       
+
+         /*
+            try
+            {
+               
+            JLabel image = new JLabel (new ImageIcon("des" + de1 + ".jpg"));
+            Image image2 = ImageIO.read(new File("des" + de1 + ".jpg"));
+            unAffichage.jLabel3 = image;
+            unAffichage.jLabel3.setVisible(true);
+            unAffichage.jPanel1.add(image);
+            Graphics g= null;
+            g.drawImage(image2, 0, 0, unAffichage.jPanel1);
+            unAffichage.jPanel1.paintComponents(null);
+            unAffichage.jPanel1.setVisible(true);
+            
+            }
+            catch(Exception e)
+            {
+                afficherLesDes(de1, de2, de3, choix);
+            }
+            "des" + de1 + ".jpg"
+         */
+         
     } // afficherLesDes
     
 
@@ -303,7 +340,7 @@ public class Tp2_1
     public static int calculerCreditsEnMain ( int enMain, int crMises, int nbFoisLaMise )
     {
         int gainEnCredits;          // Gain calculï¿½ en nombre de crï¿½dits
-        final String MESS_CREDITS = " crï¿½dits."; 
+        final String MESS_CREDITS = " crédits."; 
 
         //  Si le nombre de fois la mise est ï¿½gale ï¿½ 0, ï¿½a indique que le joueur
         //  a perdu et un message en ce sens est affichï¿½.  Sinon, le nombre de
@@ -333,8 +370,8 @@ public class Tp2_1
     public static void afficherResultPari ( String message, int enMain )
     {
         final String MESS_CREDITS_EN_MAIN = "\nVous disposez maintenant de ";
-        final String MESS_CREDIT = " crï¿½dit.";   
-        final String MESS_CREDITS = " crï¿½dits."; 
+        final String MESS_CREDIT = " crédit. \n";   
+        final String MESS_CREDITS = " crédits. \n"; 
         
         unAffichage.TextArea.append ( message );
         
@@ -377,19 +414,19 @@ public class Tp2_1
         // Il doit avoir au moins 3 crï¿½dits en main pour avoir la possibilitï¿½ de relancer un dï¿½.
         //
         if ( creditsEnMain >= CREDIT_PAR_LANCER && 
-             reponseEstOui ( MessagesTp2.MESS_RELANCER + "1 ? " ) ) {
+             reponseEstOui ( MessagesTp2.MESS_RELANCER + "1 ? \n" ) ) {
             de1 = Aleatoire.lancerUnDe6();
             creditsEnMain = creditsEnMain - CREDIT_PAR_LANCER;
             deRelance = true;
         }
         if ( creditsEnMain >= CREDIT_PAR_LANCER && 
-             reponseEstOui ( MessagesTp2.MESS_RELANCER + "2 ? " ) ) {
+             reponseEstOui ( MessagesTp2.MESS_RELANCER + "2 ? \n" ) ) {
             de2 = Aleatoire.lancerUnDe6();
             creditsEnMain = creditsEnMain - CREDIT_PAR_LANCER;
             deRelance = true;
         }        
         if ( creditsEnMain >= CREDIT_PAR_LANCER && 
-             reponseEstOui ( MessagesTp2.MESS_RELANCER + "3 ? " ) ) {
+             reponseEstOui ( MessagesTp2.MESS_RELANCER + "3 ? \n" ) ) {
             de3 = Aleatoire.lancerUnDe6();
             creditsEnMain = creditsEnMain - CREDIT_PAR_LANCER;
             deRelance = true;
@@ -419,9 +456,9 @@ public class Tp2_1
      */
     public static void afficherFinPartie ( int creditEnMain )
     {
-        final String MESS_FIN_PARTIE = "\nVous avez terminï¿½ la partie avec ";
-        final String MESS_CREDIT = " crï¿½dit";   
-        final String MESS_CREDITS = " crï¿½dits"; 
+        final String MESS_FIN_PARTIE = "\nVous avez terminé la partie avec ";
+        final String MESS_CREDIT = " crédit";   
+        final String MESS_CREDITS = " crédits"; 
         
         unAffichage.TextArea.append ( MESS_FIN_PARTIE + creditEnMain );
         if ( creditEnMain <= 1 ) {
@@ -441,12 +478,8 @@ public class Tp2_1
      */
     public static void afficherNomJeu ()
     {
-        final String MESS_DEBUT_PARTIE = "\nJEU DU LANCER DES Dï¿½S\n";
-        final String MESS_DEBUT_SOULIGN = "=====================\n";
-
-        unAffichage.TextArea.append ( MESS_DEBUT_PARTIE );
+        final String MESS_DEBUT_SOULIGN = "=====================================\n";
         unAffichage.TextArea.append ( MESS_DEBUT_SOULIGN );
-        
     } // afficherNomJeu    
     
     //TODO JavaDoc
@@ -460,10 +493,11 @@ public class Tp2_1
         		|| etat.equals("E") 
         		|| etat.equals("Q") ) ) {
         	
-            unAffichage.AfficheErreur( MessagesTp2.MESS_ERREUR_PEQ );
+            AfficheErreur( MessagesTp2.MESS_ERREUR_PEQ );
+            unAffichage.effacer();
             etat = questionRepString ( question ).toUpperCase();
         } // while
-        		
+        unAffichage.effacer();		
         return etat;
     }
     
@@ -477,7 +511,8 @@ public class Tp2_1
     		out.close();
     	}
     	catch ( IOException e ) {   		
-    		unAffichage.AfficheErreur(e.getMessage());
+    		AfficheErreur(e.getMessage());
+                unAffichage.effacer();
     	} 
     }
     
@@ -493,7 +528,8 @@ public class Tp2_1
 			chemin.delete();
     	}
     	catch ( IOException e ) {
-    		unAffichage.AfficheErreur(e.getMessage());
+    		AfficheErreur(e.getMessage());
+                unAffichage.effacer();
     	}
     	
     	return credits;
@@ -520,8 +556,16 @@ public class Tp2_1
         final String CHEMIN = "save/credits.txt";
 
         unAffichage = new AffichageFrame();
-        unAffichage.show(true);
+        
+        unAffichage.setTitle("JEU DU LANCER DES DES");
+        unAffichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         unAffichage.TextArea.setEditable(false);
+        desPanel unDes = new desPanel("test");
+        unAffichage.add(unDes);
+        unAffichage.pack();
+        unAffichage.show(true);
+        unAffichage.setVisible(true);
+        
         
         // Afficher le nom du jeu
         //
@@ -530,6 +574,7 @@ public class Tp2_1
         // Initialiser le processus alï¿½atoire ï¿½ l'aide d'un nombre saisi par l'utilisateur
         //
         Aleatoire.initialiserLesDes ( questionRepInt ( MessagesTp2.MESS_INITIALISER ) );
+        unAffichage.effacer();
         
         // Si un fichier de persistance existe, demander ï¿½ l'utilisateur 
         // s'il veut reprendre la partie

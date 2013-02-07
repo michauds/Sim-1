@@ -84,23 +84,21 @@ public class JeuxDeDesGui {
     public void ReponseKeyPressed(java.awt.event.KeyEvent evt) {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (lecture == ChoixDelecture.InitSystem) {
-                Tp2_1.initialisation();
+                MontrealSim1.initialisation();
             } else if (lecture == ChoixDelecture.InitCredit) {
-                Tp2_1.initCredits();
+                MontrealSim1.initCredits();
             } else if (lecture == ChoixDelecture.ChoixDuLoad) {
-                Tp2_1.determinerEtat();
+                MontrealSim1.determinerEtat();
             } else if (lecture == ChoixDelecture.ChoixDeParis) {
-                Tp2_1.lireLeChoixDeParis();
+                MontrealSim1.lireLeChoixDeParis();
             } else if (lecture == ChoixDelecture.LireMise) {
-                Tp2_1.lireLaMise();
+                MontrealSim1.lireLaMise();
             }
             if (lecture == ChoixDelecture.LancerDes) {
-                Tp2_1.jouer();
+                MontrealSim1.jouer();
             } else if (lecture == ChoixDelecture.ReLancerDes) {
-                Tp2_1.relancer();
-            } else if (lecture == ChoixDelecture.Fin) {
+                MontrealSim1.relancer();
             }
-
             Reponse.setText(null);
         }
     }

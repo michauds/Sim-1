@@ -23,6 +23,7 @@ public class MonCanvas extends JComponent {
         img = new ImageIcon(Nom).getImage();
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(img, 0, 0, this);

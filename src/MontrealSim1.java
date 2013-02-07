@@ -25,7 +25,7 @@ import javax.swing.*;
  * son dï¿½sir de mettre fin ï¿½ la partie.
  *
  */
-public class Tp2_1 {
+public class MontrealSim1 {
 
     static JeuxDeDesGui monGui;
     // Dï¿½claration des variables
@@ -165,11 +165,8 @@ public class Tp2_1 {
     public static void afficherLesDes(int de1, int de2, int de3, int choix) {
         monGui.TextArea.setText(null);;
         final String MESS_VOICI_LES_DES = "\nVoici les trois dés : ";
-        if (choix == 4) {
-            monGui.TextArea.append(MESS_VOICI_LES_DES + de1 + " + " + de2 + " + " + de3 + " = " + sommeDes(de1, de2, de3) + "\n ");
-        } else {
-            monGui.TextArea.append(MESS_VOICI_LES_DES + de1 + "  " + de2 + "  " + de3 + " \n ");
-        }
+     
+        monGui.TextArea.append(MESS_VOICI_LES_DES + de1 + " + " + de2 + " + " + de3 + " = " + sommeDes(de1, de2, de3) + "\n ");
 
         monGui.AfficherLesImages("Image/des" + de1 + ".jpg", "Image/des" + de2 + ".jpg", "Image/des" + de3 + ".jpg");
     } // afficherLesDes

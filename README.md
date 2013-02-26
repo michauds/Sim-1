@@ -1,6 +1,9 @@
-Sim-1
-=====
+INF6150: Génie logiciel: conduite de projets informatiques
 
-TP1_INF6150
+TP1: Simulation-1
 
-�QUIPE MONTR�AL
+Description: 
+
+Mise à jour d'un jeux de dés
+
+ÉQUIPE MONTRÉAL
